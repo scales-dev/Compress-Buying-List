@@ -21,3 +21,10 @@ dependencies {
     // https://github.com/xdrop/fuzzywuzzy
     implementation("me.xdrop:fuzzywuzzy:1.4.0")
 }
+
+jar {
+    manifest {
+        // java wont run without this!
+        attributes('Main-Class': 'org.example.Main')
+    }
+}
