@@ -1,6 +1,14 @@
 > A recode of https://github.com/scales-dev/Simplify-Product-List
 > because paying for Excel is an unnecessary cost.
 
+## Usage
+
+1. Download a Java 21 JRE, I personally recommend [Eclipse Temurin](https://adoptium.net/temurin/releases/?version=21)
+2. Download a jar from [releases](https://github.com/scales-dev/Compress-Buying-List/releases)
+3. Open your terminal, type "java -jar {drop jar} {drop input.csv}"
+4. OUTPUT.csv will appear with the fixed product list!
+
+## About
 At work, each day the trade team has to manually simplify a long list of products. eg.
 
 <img width="363" height="337" alt="image" src="https://github.com/user-attachments/assets/cd8716e6-0fcb-4743-9b3b-9b6c92939a51" />
