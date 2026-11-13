@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 
 public class Main {
-  private static final Path CSV_PATH = Path.of("/home/jack-scales/Downloads/input.csv");
   private static final int MIN_FUZZY_SCORE = 90;
 
   private static final String[] IGNORED_WORDS = {"pre-order", "fresh", "fruit"};
@@ -26,6 +25,8 @@ public class Main {
       Pattern.compile("([0-9.]++)\\s*g\\b", Pattern.CASE_INSENSITIVE);
 
   public static void main(String[] args) {
+    final Path CSV_PATH = Path.of(args[0]);
+
     ArrayList<Map<String, String>> inputCSV = CsvUtil.readCsv(CSV_PATH, false);
     ArrayList<Map<String, String>> outputCSV = new ArrayList<>();
 
