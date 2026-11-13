@@ -37,7 +37,7 @@ public class CsvUtil {
     }
   }
 
-  public static ArrayList<Map<String, String>> readCsv(Path file) {
+  public static ArrayList<Map<String, String>> readCsv(Path file, boolean header) {
     try {
       BufferedReader reader = new BufferedReader(new InputStreamReader(
               // removes weird characters like zero width spaces which are somehow getting into my headers
@@ -45,13 +45,11 @@ public class CsvUtil {
               StandardCharsets.UTF_8
       ));
 
-      CSVParser csvParser = CSVParser.parse(
-              reader,
-              CSVFormat.DEFAULT.builder()
-                      .setHeader()
-                      .setSkipHeaderRecord(true)
-                      .get()
-      );
+      CSVFormat.Builder formatBuilder = CSVFormat.DEFAULT.builder();
+      if (header) {
+        formatBuilder = formatBuilder.setHeader().setSkipHeaderRecord(true);
+      }
+      CSVParser csvParser = CSVParser.parse(reader, formatBuilder.get());
 
       ArrayList<Map<String, String>> csv = new ArrayList<>();
 
