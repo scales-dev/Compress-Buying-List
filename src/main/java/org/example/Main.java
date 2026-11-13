@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
+import scales.dev.CsvUtil;
 
 public class Main {
   private static final int MIN_FUZZY_SCORE = 90;
@@ -12,8 +13,8 @@ public class Main {
   private static final String[] IGNORED_WORDS = {"pre-order", "fresh", "fruit"};
   private static final String IGNORED_WORDS_REGEX = "(?i)" + String.join("|", IGNORED_WORDS);
 
-  // looks for numbers not immediately followed by a weight, if theres a weight anywhere, this regex
-  // isnt called anyway.
+  // looks for numbers not immediately followed by a weight.
+  // if there is a weight anywhere, this regex isnt called anyway.
   // none of the numbers should have a decimal, its just to stop it matching weights.
   private static final Pattern QUANTITY_REGEX =
       Pattern.compile("([0-9.]++)(?!\\s*(kg|g)\\b)", Pattern.CASE_INSENSITIVE);
