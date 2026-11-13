@@ -8,6 +8,7 @@ version = '1.0'
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -21,6 +22,8 @@ dependencies {
 
     // https://github.com/xdrop/fuzzywuzzy
     implementation("me.xdrop:fuzzywuzzy:1.4.0")
+
+    implementation 'com.github.scales-dev:Csv-Scripting:-SNAPSHOT'
 }
 
 jar {
