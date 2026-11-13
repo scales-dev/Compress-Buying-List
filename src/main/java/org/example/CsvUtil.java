@@ -54,7 +54,18 @@ public class CsvUtil {
       ArrayList<Map<String, String>> csv = new ArrayList<>();
 
       for (CSVRecord record : csvParser.getRecords()) {
-        csv.add(record.toMap());
+        if (header) {
+          csv.add(record.toMap());
+        }
+        else {
+          Map<String, String> recordMap = new HashMap<>();
+
+          for(int i = 0; i < record.size(); i++) {
+            recordMap.put(String.valueOf(i), record.get(i));
+          }
+
+          csv.add(recordMap);
+        }
       }
 
       csvParser.close();
