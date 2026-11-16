@@ -15,7 +15,8 @@ dependencies {
     // https://github.com/xdrop/fuzzywuzzy
     implementation("me.xdrop:fuzzywuzzy:1.4.0")
 
-    implementation 'com.github.scales-dev:Csv-Scripting:-SNAPSHOT'
+    // https://jitpack.io/#scales-dev/Spreadsheet-Scripting
+    implementation 'com.github.scales-dev:Spreadsheet-Scripting:d4f0cd2814'
 }
 
 jar {

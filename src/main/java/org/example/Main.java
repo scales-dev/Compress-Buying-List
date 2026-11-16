@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import scales.dev.CsvUtil;
+import scales.dev.SpreadsheetUtil;
 
 public class Main {
   private static final int MIN_FUZZY_SCORE = 90;
@@ -28,12 +29,13 @@ public class Main {
   public static void main(String[] args) {
     final Path CSV_PATH = Path.of(args[0]);
 
-    ArrayList<Map<String, String>> inputCSV = CsvUtil.readCsv(CSV_PATH, false);
+    ArrayList<Map<String, String>> inputCSV = SpreadsheetUtil.read(CSV_PATH, false);
     ArrayList<Map<String, String>> outputCSV = new ArrayList<>();
 
     while (!inputCSV.isEmpty()) {
       Product product = new Product();
-      handleRow(inputCSV, inputCSV.getFirst(), product);
+
+      if (!handleRow(inputCSV, inputCSV.getFirst(), product)) continue;
 
       // i cried when i found out hashmaps dont preserve order.
       Map<String, String> output = new LinkedHashMap<>();
@@ -48,9 +50,13 @@ public class Main {
     CsvUtil.writeCsv(CSV_PATH.getParent().resolve("OUTPUT.csv"), outputCSV);
   }
 
-  private static void handleRow(
+  private static boolean handleRow(
       ArrayList<Map<String, String>> inputCSV, Map<String, String> row, Product product) {
-    if (!inputCSV.remove(row)) return;
+    if (!inputCSV.remove(row)) return false;
+
+    // we often have empty entries, idk why.
+    String nameSquare = row.get("0");
+    if (nameSquare == null || nameSquare.isBlank()) return false;
 
     String quantityString = row.get("2");
     int quantity = quantityString == null || quantityString.isEmpty() ? 1 : Integer.parseInt(quantityString);
@@ -78,6 +84,7 @@ public class Main {
     product.quantity += weight > 0 ? 0 : variantQuantity > 0 ? quantity * variantQuantity : 1;
 
     product.source.add(name + " (" + quantity + ")");
+    return true;
   }
 
   private static class Product {
