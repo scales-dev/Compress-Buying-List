@@ -53,7 +53,7 @@ public class Main {
     if (!inputCSV.remove(row)) return;
 
     String quantityString = row.get("2");
-    int quantity = quantityString.isEmpty() ? 1 : Integer.parseInt(quantityString);
+    int quantity = quantityString == null || quantityString.isEmpty() ? 1 : Integer.parseInt(quantityString);
 
     String matchProductName = getMatchProductName(row);
     List<Map<String, String>> matching =
