@@ -39,7 +39,7 @@ public class Main {
 
       // i cried when i found out hashmaps dont preserve order.
       Map<String, String> output = new LinkedHashMap<>();
-      output.put("Source", String.join("\n", product.source));
+      output.put("Source", String.join("\n", product.source.stream().sorted().toList()));
       output.put("Quantity", String.valueOf(product.quantity));
       output.put("Weight (g)", String.valueOf(product.weight));
       outputCSV.add(output);
